@@ -46,9 +46,11 @@ async function run() {
         app.get("/manageallorders", async (req, res) => {
             let query = {};
             const email = req.query.email;
+            console.log(email);
             if (email) {
                 query = { email: email };
             }
+            console.log(query)
             const search = await orderCollection.find(query).toArray();
             res.json(search);
         })
@@ -58,7 +60,7 @@ async function run() {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const order = await orderCollection.deleteOne(query);
-            res.json(order);
+            res.send(order);
         })
 
         // post API for placeing order
