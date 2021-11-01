@@ -42,20 +42,7 @@ async function run() {
             res.send(getRide);
         })
 
-        // get email for my order 
-        app.get("/manageallorders", async (req, res) => {
-            let query = {};
-            const email = req.query.email;
-            console.log(email);
-            if (email) {
-                query = { email: email };
-            }
-            console.log(query)
-            const search = await orderCollection.find(query).toArray();
-            res.json(search);
-        })
-
-        // delete order from my order
+        // delete order 
         app.delete("/manageallorders/:id", async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
